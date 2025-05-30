@@ -1,0 +1,63 @@
+﻿@model List<CurrencyModel>
+@{
+    ViewData["Title"] = "All Currencies Page";
+}
+<h1>Курсы валют с реализацией поиска на стороне клиента</h1>
+<script>
+    function refreshPage() {
+        location.reload();
+    }
+    setInterval(refreshPage, 10000);// Устанавливаем интервал обновления в 10 секунд (10000 миллисекунд)
+
+    function filterCurrencies() {
+        const enteredByUserValue = document.getElementById('searchInput');
+        const filteredValue = enteredByUserValue.value.toLowerCase();
+        const selectElementsOfCodeForFiltering = document.querySelector('.table tbody');
+        const rowsFromElemTR = selectElementsOfCodeForFiltering.getElementsByTagName('tr');
+
+        for (let i = 0; i < rowsFromElemTR.length; i++) {
+            const cells = rowsFromElemTR[i].getElementsByTagName('td');
+            let found = false; //исп. для отслеживания нахождения ячейки <td> в перебираемой строке
+
+            for (let j = 0; j < cells.length; j++) {
+                if (cells[j]) { //проверка на существование ячейки
+                    const textCellValue = cells[j].textContent || cells[j].innerText;
+                    if (textCellValue.toLowerCase().indexOf(filteredValue) > -1) { //проверка на наличие текста в ячейке <td>
+                        found = true; //если найдено, то устанавливаем заничение true для найденных значений
+                        break;
+                    }
+                }
+            }
+
+            rowsFromElemTR[i].style.display = found ? "" : "none"; // Показываем или скрываем строку
+        }
+    }
+</script>
+
+
+<input type="text" id="searchInput" placeholder="Отфильтровать" onkeyup="filterCurrencies()">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Код</th>
+            <th>Дата</th>
+            <th>Аббревиатура</th>
+            <th>Единица измерения</th>
+            <th>Название</th>
+            <th>Официальный курс</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var elem in Model)
+        {
+            <tr>
+                <td>@elem.Cur_ID</td>
+                <td>@elem.Date.ToString("yyyy-MM-dd")</td>
+                <td>@elem.Cur_Abbreviation</td>
+                <td>@elem.Cur_Scale</td>
+                <td>@elem.Cur_Name</td>
+                <td>@elem.Cur_OfficialRate</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,53 @@
+﻿@model List<string>
+<h2>Конвертация валют</h2>
+
+
+<form method="post" asp-action="ConvertCurrencies">
+    <label>Сумма:</label>
+    <input type="text" name="amountStr" value="" required/>
+    <br />
+
+    <label>Исходная валюта:</label>
+    <select name="fromCurrency">
+        @foreach (var currency in Model)
+        {
+            <option value="@currency">@currency</option>
+        }
+    </select>
+    <br />
+
+    <label>В валюту №1:</label>
+    <select name="toCurrency">
+        @foreach (var currency in Model)
+        {
+            <option value="@currency">@currency</option>
+        }
+    </select>
+    <br />
+
+    <label>В валюту №2:</label>
+    <select name="toCurrency2">
+        @foreach (var currency in Model)
+        {
+            <option value="@currency">@currency</option>
+        }
+    </select>
+    <br />
+    <button type="submit">Конвертировать</button>
+</form>
+
+@* Вывод ошибок *@
+@if (ViewBag.Error != null)
+{
+    <p style="color:red;">@ViewBag.Error</p>
+}
+
+@* Вывод результатов *@
+@if (ViewBag.ResultAmount1 != null && ViewBag.ResultAmount2 != null)
+{
+    <h3>Результаты</h3>
+    <p>
+        @ViewBag.OriginalAmount @ViewBag.FromCurrency = @ViewBag.ResultAmount1 @ViewBag.ToCurrency<br />
+        @ViewBag.OriginalAmount @ViewBag.FromCurrency = @ViewBag.ResultAmount2 @ViewBag.ToCurrency2
+    </p>
+}

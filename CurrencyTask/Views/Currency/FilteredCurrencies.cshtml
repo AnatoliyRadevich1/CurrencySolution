@@ -1,0 +1,36 @@
+﻿@model List<CurrencyModel>
+@{
+    ViewData["Title"] = "Filtered Currencies Page";
+}
+<h1>Курсы валют EUR, RUB, USD</h1>
+<script>
+    function refreshPage() {
+        location.reload();
+    }
+    setInterval(refreshPage, 10000);// Устанавливаем интервал обновления в 10 секунд (10000 миллисекунд)
+</script>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Код</th>
+            <th>Дата</th>
+            <th>Аббревиатура</th>
+            <th>Единица измерения</th>
+            <th>Название</th>
+            <th>Официальный курс</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var elem in Model)
+        {
+            <tr>
+                <td>@elem.Cur_ID</td>
+                <td>@elem.Date.ToString("yyyy-MM-dd")</td>
+                <td>@elem.Cur_Abbreviation</td>
+                <td>@elem.Cur_Scale</td>
+                <td>@elem.Cur_Name</td>
+                <td>@elem.Cur_OfficialRate</td>
+            </tr>
+        }
+    </tbody>
+</table>
