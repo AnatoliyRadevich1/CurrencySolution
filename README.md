@@ -18,6 +18,7 @@
 > [нажав на этот текст](https://learn.microsoft.com/ru-ru/visualstudio/deployment/quickstart-deploy-aspnet-web-app?view=vs-2022&tabs=azure "да, именно на этот текст"),
 > поэтому нет смысла с данного источника переписывать текст в данный файл.
 > Кратко инструкцию по публикации достаточно описать двумя картинками:
+> 
 ![Первая картинка](https://learn.microsoft.com/ru-ru/visualstudio/deployment/media/right-click-publish.png?view=vs-2022)
 ![Вторая картинка](https://learn.microsoft.com/ru-ru/visualstudio/deployment/media/publish-targets-general.png?view=vs-2022)
 
